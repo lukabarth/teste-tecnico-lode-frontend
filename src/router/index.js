@@ -1,17 +1,19 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Medicos from '@/views/Medicos.vue';
-import Agendas from '@/views/Agendas.vue';
-import Consultas from '@/views/Consultas.vue';
-import Pacientes from '@/views/Pacientes.vue';
-
-Vue.use(VueRouter);
+import { createRouter, createWebHistory } from 'vue-router'
+import Agendas from '@/views/AgendaForm.vue'
+import Consultas from '@/views/ConsultaForm.vue'
+import Pacientes from '@/views/PacienteForm.vue'
+import MedicoForm from '@/views/MedicoForm.vue'
 
 const routes = [
-  { path: '/medicos', component: Medicos },
+  { path: '/medicos', component: MedicoForm },
   { path: '/agendas', component: Agendas },
   { path: '/consultas', component: Consultas },
   { path: '/pacientes', component: Pacientes }
-];
+]
 
-export default new VueRouter({ routes });
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+})
+
+export default router
