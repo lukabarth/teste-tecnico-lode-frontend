@@ -50,6 +50,7 @@ export default {
                 
                 if (response.ok) {
                     alert("Paciente salvo com sucesso!");
+                    this.paciente = { nome: null, idade: null, cidade: null, estado: null, cpf: null };
                 } else {
                     console.error("Erro ao salvar paciente:", response.statusText);
                 }
