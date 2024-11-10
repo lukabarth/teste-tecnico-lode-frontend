@@ -28,7 +28,7 @@ export default {
         return {
             consulta: {
                 agendaId: null,
-                pacienteId: [],
+                pacienteId: null
             },
             agendas: [],
             pacientes: [],
@@ -65,9 +65,9 @@ export default {
 
         async salvarConsulta() {
             console.log("Consulta a ser salva:", this.consulta);
-
-            if (Array.isArray(this.consulta.pacienteId) && this.consulta.pacienteId.length === 1) {
-                this.consulta.pacienteId = [this.consulta.pacienteId[0]];
+            if (!this.consulta.agendaId || !this.consulta.pacienteId) {
+                alert("Por favor, preencha todos os campos.");
+                return;
             }
 
             try {
@@ -79,7 +79,7 @@ export default {
 
                 if (response.ok) {
                     alert("Consulta cadastrada com sucesso!");
-                    this.consulta = { agendaId: null, pacienteId: [] }
+                    this.consulta = { agendaId: null, pacienteId: null }
                 } else {
                     console.error("Erro ao salvar consulta:", response.statusText);
                 }
@@ -92,40 +92,43 @@ export default {
 </script>
 
 <style>
-html, body {
-  padding-bottom: 100px;
-  height: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+html,
+body {
+    padding-bottom: 100px;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-consultas {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  background-color: #280457;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #280457;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-left: 100px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-left: 100px;
 }
 
-input[type="text"], input[type="submit"] {
-  padding: 10px;
-  margin: 10px 0;
-  width: 100%;
-  box-sizing: border-box;
+input[type="text"],
+input[type="submit"] {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}</style>
+    text-align: center;
+    margin-bottom: 20px;
+}
+</style>
